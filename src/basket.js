@@ -1,7 +1,5 @@
 'use strict';
 
-var basketItem = require('./basket-item');
-
 function Basket() {
   this.basketItems = [];
 }
@@ -29,5 +27,10 @@ Basket.prototype.findBasketItem = function (basketItem) {
     return result;
   }
 };
+
+Basket.prototype.getBasketItems = function () {
+  return this.basketItems;
+};
+
 
 module.exports = Basket;
