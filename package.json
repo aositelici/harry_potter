@@ -1,0 +1,16 @@
+{
+  "name": "guessnumber",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js --use_strict",
+    "test": "jasmine "
+  },
+  "dependencies": {
+    "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.1"
+  }
+}
+
