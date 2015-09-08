@@ -1,6 +1,7 @@
 'use strict';
 
 var Discount = require('./discount');
+
 function Counter(basket, scanner) {
   this.basket = basket;
   this.scanner = scanner;
