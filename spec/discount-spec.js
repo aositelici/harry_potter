@@ -1,6 +1,6 @@
 'use strict';
 
-var Discount = require('../src/discount');
+var Discount = require('../src/model/discount');
 
 describe('Discount', function () {
 

@@ -1,8 +1,8 @@
 'use strict';
 
-var Scanner = require('../src/scanner');
-var Book = require('../src/book');
-var BasketItem = require('../src/basket-item');
+var Scanner = require('../src/model/scanner');
+var Book = require('../src/model/book');
+var BasketItem = require('../src/model/basket-item');
 
 describe('scanner', function () {
 

@@ -1,5 +1,5 @@
 'use strict';
-var Utils = require('./utils');
+var Utils = require('../lib/utils');
 function Discount(basket, price) {
   this.basket = basket;
   this.price = price;

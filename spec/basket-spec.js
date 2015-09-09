@@ -1,6 +1,6 @@
 'use strict';
 
-var Basket = require('../src/basket');
+var Basket = require('../src/model/basket');
 
 describe('basket', function () {
   var basket;

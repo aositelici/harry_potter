@@ -1,7 +1,7 @@
 'use strict';
 
 exports.loadAllBooks = function () {
-  var Book = require('../src/book');
+  var Book = require('../src/model/book');
   return [
     new Book('first',  8.00),
     new Book('second',  8.00),

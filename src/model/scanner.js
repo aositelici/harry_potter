@@ -1,6 +1,6 @@
 'use strict';
 
-var fixture = require('../spec/fixtures');
+var fixture = require('../../spec/fixtures');
 var BasketItem = require('./basket-item');
 
 function Scanner() {
