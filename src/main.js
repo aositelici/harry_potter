@@ -9,13 +9,13 @@ function main(tags) {
 
   var basket = new Basket();
   var scanner = new Scanner();
-  var counter = new Counter(basket,scanner);
-  tags.forEach(function(tag) {
+  var counter = new Counter(basket, scanner);
+  tags.forEach(function (tag) {
     counter.scan(tag);
   });
 
-  var discount = counter.getDiscount(price);
-  console.log(discount +' is the price with the biggest discount');
+  var discount = counter.getFinalPrice(price);
+  console.log(discount + ' is the price with the biggest discount');
 }
 
 exports.main = main;
