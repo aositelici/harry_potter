@@ -14,7 +14,7 @@ describe('basket', function () {
   describe('#findBasketItem', function () {
 
     it("basket has the same book ,the find result should be " +
-        "{book: {name: 'first', price: 8.00}, count: 2}", function () {
+       "{book: {name: 'first', price: 8.00}, count: 2}", function () {
 
       basket.basketItems = [{book: {name: 'first', price: 8.00}, count: 2},
                             {book: {name: 'second', price: 8.00}, count: 1}
@@ -31,7 +31,7 @@ describe('basket', function () {
   describe('#addBasketItem', function () {
 
     it("basket has the same book ,the add result should be [{book: {name: 'first', price: 8.00}, count: 3}," +
-        "{book: {name: 'second', price: 8.00}, count: 1}]", function () {
+       "{book: {name: 'second', price: 8.00}, count: 1}]", function () {
 
       basket.basketItems = [{book: {name: 'first', price: 8.00}, count: 2},
                             {book: {name: 'second', price: 8.00}, count: 1}
@@ -47,8 +47,8 @@ describe('basket', function () {
                                          ]);
     });
 
-    it("basket does not have the same book ,the add result should be [{book: {name: 'second', price: 8.00}, count: 1}," +
-        "{book: {name: 'first', price: 8.00}, count: 1}]", function () {
+    it("basket does not have the same book ,the add result should be [{book: {name: 'second', price: 8.00}, count: 1}" +
+       ",{book: {name: 'first', price: 8.00}, count: 1}]", function () {
 
       basket.basketItems = [{book: {name: 'second', price: 8.00}, count: 1}];
 
