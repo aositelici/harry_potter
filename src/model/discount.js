@@ -1,48 +1,40 @@
 'use strict';
+
 var Utils = require('../lib/utils');
-function Discount(basket, price) {
-  this.basket = basket;
-  this.price = price;
+
+function Discount(basketItems) {
+  this.basketItems = basketItems;
 }
-
-Discount.prototype.getAmount = function () {
-  var _this = this;
-  var amount = 0;
-
-  this.basket.forEach(function (basketItem) {
-    amount += basketItem.count * _this.price;
-  });
-  return Utils.formatData(amount);
-};
 
 Discount.prototype.getDiscount = function () {
   var discount = 0;
 
-  while (this.basket.length > 1) {
-    discount += this.calculateDiscount(this.basket.length);
-    for (var i = 0; i < this.basket.length; i++) {
-      this.basket[i].count -= 1;
-      if (this.basket[i].count === 0) {
-        this.basket.splice(i, 1);
-        i--;
-      }
-    }
+  while (this.basketItems.length > 1) {
+
+    var price = 0;
+    this.basketItems.forEach(function (basketItem) {
+      price += basketItem.getPrice();
+    });
+
+    discount += this.calculateDiscount(this.basketItems.length, price);
+
+    Utils.reduceCount(this.basketItems);
   }
-  return  Utils.formatData(discount);
+  return discount;
 };
 
-Discount.prototype.calculateDiscount = function (diffCounts) {
+Discount.prototype.calculateDiscount = function (diffCounts, price) {
   if (diffCounts === 2) {
-    return Math.round(diffCounts * this.price * 0.05*100)/100;
+    return Utils.format2(price * 0.05);
   }
   else if (diffCounts === 3) {
-    return  Math.round(diffCounts * this.price * 0.10*100)/100;
+    return Utils.format2(price * 0.10);
   }
   else if (diffCounts === 4) {
-    return Math.round(diffCounts * this.price * 0.20*100)/100;
+    return Utils.format2(price * 0.20);
   }
   else if (diffCounts === 5) {
-    return Math.round(diffCounts * this.price * 0.25*100)/100;
+    return Utils.format2(price * 0.25);
   }
   else if (diffCounts === 1) {
     return 0.00;
