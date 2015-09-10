@@ -28,8 +28,12 @@ Basket.prototype.findBasketItem = function (basketItem) {
   }
 };
 
-Basket.prototype.getBasketItems = function () {
-  return this.basketItems;
+Basket.prototype.getItemCounts = function () {
+  var counts = [];
+  this.basketItems.forEach(function(basketItem) {
+    counts.push(basketItem.count);
+  });
+  return counts;
 };
 
 
