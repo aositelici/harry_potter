@@ -1,6 +1,6 @@
 'use strict';
 var _ = require('lodash');
-
+var DISCOUNT_SCHEME = require('../lib/discount-scheme');
 function Discount() {
 }
 
@@ -9,8 +9,8 @@ Discount.prototype.rankByCount = function (counts) {
   return counts;
 };
 
-Discount.prototype.getMin = function(counts) {
-  return Math.min.apply(null,counts);
+Discount.prototype.getMin = function (counts) {
+  return Math.min.apply(null, counts);
 };
 
 Discount.prototype.findBestSolve = function (counts) {
@@ -23,36 +23,36 @@ Discount.prototype.findBestSolve = function (counts) {
   var count4 = counts[3];
   var count5 = counts[4];
 
-  if(counts[0] > 0){
-    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
-         2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
-         3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
-        4 * 8 * 0.8 + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1]),
-        5 * 8 * 0.75 + this.findBestSolve([count1 - 1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
+  if (count1 > 0) {
+    return this.getMin([DISCOUNT_SCHEME.ONE_BOOK + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      DISCOUNT_SCHEME.TWO_BOOKS + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.THREE_BOOKS + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.FOUR_BOOKS + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.FIVE_BOOKS + this.findBestSolve([count1 - 1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
   }
 
-  else if(counts[0] == 0 && counts[1] > 0 ){
-    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
-      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
-      3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
-      4 * 8 * 0.8 + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
+  else if (count1 == 0 && count2 > 0) {
+    return this.getMin([DISCOUNT_SCHEME.ONE_BOOK + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      DISCOUNT_SCHEME.TWO_BOOKS + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.THREE_BOOKS + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.FOUR_BOOKS + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
   }
 
-  else if(counts[0] == 0 && counts[1] == 0 && counts[2] > 0 ){
-    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
-      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
-      3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1])])
+  else if (count1 == 0 && count2 == 0 && count3 > 0) {
+    return this.getMin([DISCOUNT_SCHEME.ONE_BOOK + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      DISCOUNT_SCHEME.TWO_BOOKS + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+      DISCOUNT_SCHEME.THREE_BOOKS + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1])])
   }
 
-  else if(counts[0] == 0 && counts[1] == 0
-      && counts[2] == 0  && counts[3] > 0){
-    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
-      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1])])
+  else if (count1 == 0 && count2 == 0
+      && count3 == 0 && count4 > 0) {
+    return this.getMin([DISCOUNT_SCHEME.ONE_BOOK + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      DISCOUNT_SCHEME.TWO_BOOKS + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1])])
   }
 
-  else if(counts[0] == 0 && counts[1] == 0
-      && counts[2] == 0  && counts[3] == 0 && counts[4] > 0){
-    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1])])
+  else if (count1 == 0 && count2 == 0
+      && count3 == 0 && count4 == 0 && count5 > 0) {
+    return this.getMin([DISCOUNT_SCHEME.ONE_BOOK + this.findBestSolve([count1, count2, count3, count4, count5 - 1])])
   }
 
   else {
