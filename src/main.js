@@ -14,7 +14,7 @@ function main(tags) {
     counter.scan(tag);
   });
 
-  var discount = counter.getFinalPrice(price);
+  var discount = counter.getDiscount();
   console.log(discount + ' is the price with the biggest discount');
 }
 
