@@ -2,7 +2,7 @@
 
 var Basket = require('../src/model/basket');
 
-describe('basket', function () {
+describe('basket: ', function () {
   var basket;
   var inputBasketItem;
 
@@ -11,7 +11,7 @@ describe('basket', function () {
     inputBasketItem = {book: {name: 'first', price: 8.00}, count: 1};
   });
 
-  describe('#findBasketItem', function () {
+  describe('#findBasketItem: ', function () {
 
     it("basket has the same book ,the find result should be " +
        "{book: {name: 'first', price: 8.00}, count: 2}", function () {
@@ -28,7 +28,7 @@ describe('basket', function () {
     })
   });
 
-  describe('#addBasketItem', function () {
+  describe('#addBasketItem: ', function () {
 
     it("basket has the same book ,the add result should be [{book: {name: 'first', price: 8.00}, count: 3}," +
        "{book: {name: 'second', price: 8.00}, count: 1}]", function () {
@@ -63,5 +63,14 @@ describe('basket', function () {
                                          ]);
     })
   });
+
+  describe('#getItemCounts: ', function () {
+    it("should return each item's counts as a array", function () {
+      basket.basketItems = [{book: {name: 'first', price: 8.00}, count: 2},
+                            {book: {name: 'second', price: 8.00}, count: 1}
+      ];
+      expect(basket.getItemCounts()).toEqual([2, 1]);
+    })
+  })
 
 });
