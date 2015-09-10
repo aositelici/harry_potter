@@ -5,7 +5,6 @@ var Scanner = require('./model/scanner');
 var Counter = require('./model/counter');
 
 function main(tags) {
-  var price = 8.00;
 
   var basket = new Basket();
   var scanner = new Scanner();
