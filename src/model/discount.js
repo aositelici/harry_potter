@@ -9,12 +9,17 @@ Discount.prototype.rankByCount = function (counts) {
   return counts;
 };
 
-Discount.prototype.getMin = function (counts) {
-  return Math.min.apply(null, counts);
+Discount.prototype.getMin = function (prices) {
+  return _.min(prices);
 };
 
 Discount.prototype.findBestSolve = function (counts) {
-
+  if(counts.length < 5){
+    var diffValue = 5 - counts.length;
+    while(diffValue --) {
+      counts.push(0);
+    }
+  }
   counts = this.rankByCount(counts);
 
   var count1 = counts[0];
