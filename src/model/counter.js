@@ -16,32 +16,11 @@ Counter.prototype.scan = function (tag) {
   }
 };
 
-Counter.prototype.getAmount = function () {
-
-  var amount = 0;
-  var basketItems = this.basket.getBasketItems();
-  basketItems.forEach(function (basketItem) {
-    amount += basketItem.count * basketItem.book.price;
-  });
-
-  return Utils.formatData(amount);
-};
-
 Counter.prototype.getDiscount = function () {
 
-  var discount = new Discount(this.basket.getBasketItems());
-  var savedAmount = discount.getDiscount();
-
+  var discount = new Discount();
+  var savedAmount = discount.findBestSolve(this.basket.getItemCounts());
   return Utils.formatData(savedAmount);
-};
-
-Counter.prototype.getFinalPrice = function () {
-
-  var amount = this.getAmount();
-  var discount = this.getDiscount();
-  var finalPrice = amount - discount;
-
-  return Utils.formatData(finalPrice);
 };
 
 module.exports = Counter;
