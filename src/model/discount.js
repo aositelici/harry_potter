@@ -16,6 +16,7 @@ Discount.prototype.getMin = function (prices) {
 Discount.prototype.findBestSolve = function (counts) {
   if(counts.length < 5){
     var diffValue = 5 - counts.length;
+
     while(diffValue --) {
       counts.push(0);
     }

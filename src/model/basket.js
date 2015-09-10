@@ -30,7 +30,7 @@ Basket.prototype.findBasketItem = function (basketItem) {
 
 Basket.prototype.getItemCounts = function () {
   var counts = [];
-  this.basketItems.forEach(function(basketItem) {
+  this.basketItems.forEach(function (basketItem) {
     counts.push(basketItem.count);
   });
   return counts;
