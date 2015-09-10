@@ -1,45 +1,63 @@
 'use strict';
+var _ = require('lodash');
 
-var Utils = require('../lib/utils');
-
-function Discount(basketItems) {
-  this.basketItems = basketItems;
+function Discount() {
 }
 
-Discount.prototype.getDiscount = function () {
-  var discount = 0;
-
-  while (this.basketItems.length > 1) {
-
-    var price = 0;
-    this.basketItems.forEach(function (basketItem) {
-      price += basketItem.getPrice();
-    });
-
-    discount += this.calculateDiscount(this.basketItems.length, price);
-
-    Utils.reduceCount(this.basketItems);
-  }
-  return discount;
+Discount.prototype.rankByCount = function (counts) {
+  counts = _.sortBy(counts);
+  return counts;
 };
 
-Discount.prototype.calculateDiscount = function (diffCounts, price) {
-  if (diffCounts === 2) {
-    return Utils.format2(price * 0.05);
-  }
-  else if (diffCounts === 3) {
-    return Utils.format2(price * 0.10);
-  }
-  else if (diffCounts === 4) {
-    return Utils.format2(price * 0.20);
-  }
-  else if (diffCounts === 5) {
-    return Utils.format2(price * 0.25);
-  }
-  else if (diffCounts === 1) {
-    return 0.00;
-  }
+Discount.prototype.getMin = function(counts) {
+  return Math.min.apply(null,counts);
 };
 
+Discount.prototype.findBestSolve = function (counts) {
+
+  counts = this.rankByCount(counts);
+
+  var count1 = counts[0];
+  var count2 = counts[1];
+  var count3 = counts[2];
+  var count4 = counts[3];
+  var count5 = counts[4];
+
+  if(counts[0] > 0){
+    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+         2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+         3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
+        4 * 8 * 0.8 + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1]),
+        5 * 8 * 0.75 + this.findBestSolve([count1 - 1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
+  }
+
+  else if(counts[0] == 0 && counts[1] > 0 ){
+    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+      3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1]),
+      4 * 8 * 0.8 + this.findBestSolve([count1, count2 - 1, count3 - 1, count4 - 1, count5 - 1])])
+  }
+
+  else if(counts[0] == 0 && counts[1] == 0 && counts[2] > 0 ){
+    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1]),
+      3 * 8 * 0.9 + this.findBestSolve([count1, count2, count3 - 1, count4 - 1, count5 - 1])])
+  }
+
+  else if(counts[0] == 0 && counts[1] == 0
+      && counts[2] == 0  && counts[3] > 0){
+    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1]),
+      2 * 8 * 0.95 + this.findBestSolve([count1, count2, count3, count4 - 1, count5 - 1])])
+  }
+
+  else if(counts[0] == 0 && counts[1] == 0
+      && counts[2] == 0  && counts[3] == 0 && counts[4] > 0){
+    return this.getMin([ 8.0 + this.findBestSolve([count1, count2, count3, count4, count5 - 1])])
+  }
+
+  else {
+    return 0;
+  }
+};
 
 module.exports = Discount;
