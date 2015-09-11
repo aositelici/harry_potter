@@ -2,7 +2,7 @@
 
 var Basket = require('../src/model/basket');
 
-describe('basket: ', function () {
+describe('basket: ', function () {//既然下面的describe是想测试方法，那么这个describe就该说清楚自己是某个类的测试集合，那就应该用大写
   var basket;
   var inputBasketItem;
 
@@ -14,7 +14,8 @@ describe('basket: ', function () {
   describe('#findBasketItem: ', function () {
 
     it("basket has the same book ,the find result should be " +
-       "{book: {name: 'first', price: 8.00}, count: 2}", function () {
+       "{book: {name: 'first', price: 8.00}, count: 2}", function () { // test case 和 assertion是可以超80个字符的
+       //上面这个写的太具体了，除非是测试格式的case，其他的case应该用更抽象的概念，让人一眼看清重点，比如关注在count上。
 
       basket.basketItems = [{book: {name: 'first', price: 8.00}, count: 2},
                             {book: {name: 'second', price: 8.00}, count: 1}

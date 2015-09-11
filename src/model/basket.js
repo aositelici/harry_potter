@@ -9,7 +9,7 @@ Basket.prototype.addBasketItem = function (basketItem) {
   if (findingItem) {
     findingItem.count += basketItem.count;
   }
-  else {
+  else {//else为啥要换行……
     this.basketItems.push(basketItem);
   }
 };
@@ -21,7 +21,7 @@ Basket.prototype.findBasketItem = function (basketItem) {
     if (basketItem.book.name === oneItem.book.name) {
       result = oneItem;
     }
-  });
+  });//这不就是个findLast,参考： https://lodash.com/docs#findLast
 
   if (result) {
     return result;
@@ -33,7 +33,7 @@ Basket.prototype.getItemCounts = function () {
   this.basketItems.forEach(function (basketItem) {
     counts.push(basketItem.count);
   });
-  return counts;
+  return counts;//这是map
 };
 
 

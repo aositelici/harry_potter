@@ -3,7 +3,7 @@
 var fixture = require('../../spec/fixtures');
 var BasketItem = require('./basket-item');
 
-function Scanner() {
+function Scanner() {//这个scanner有点多余，他就是一个计算型的
 
 }
 

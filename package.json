@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js --use_strict",
-    "test": "jasmine "
+    "test": "jasmine ",
+    "comments": "没有jasmine.json这个test是怎么跑的？"
   },
   "dependencies": {
     "lodash": "^3.10.0"

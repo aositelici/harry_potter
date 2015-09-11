@@ -20,7 +20,7 @@ describe('Discount:  ', function () {
     })
   });
 
-  describe('#findBestSolve(counts):  ', function () {
+  describe('#findBestSolve(counts):  ', function () {//test case缺的比较多，边界想的比较少
 
     describe('if you buy less than or equal to 5 books:  ', function () {
 
@@ -28,7 +28,12 @@ describe('Discount:  ', function () {
         function () {
           expect(discount.findBestSolve([1, 1])).toBe(2 * 8.00 * 0.95);
         });
-
+      
+      it('if you buy 2 different books and 1 same, you get a 5% discount. with 8 EUR one copy,the discount should be 0.80',
+          function () {
+            expect(discount.findBestSolve([1, 2])).toBe(2 * 8.00 * 0.95 + 1*8.00);
+          });
+      
       it('If you buy 3 different books, you get a 10% discount. with 8 EUR one copy,the discount should be 2.40',
         function () {
           expect(discount.findBestSolve([1, 1, 1])).toBe(3 * 8.00 * 0.90);
