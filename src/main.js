@@ -1,19 +1,17 @@
 'use strict';
 
 var Basket = require('./model/basket');
-var Scanner = require('./model/scanner');
 var Counter = require('./model/counter');
 
 function main(tags) {
 
   var basket = new Basket();
-  var scanner = new Scanner();
-  var counter = new Counter(basket, scanner);
+  var counter = new Counter(basket);
   tags.forEach(function (tag) {
     counter.scan(tag);
   });
 
-  var discount = counter.getDiscount();
+  var discount = counter.getFinalPrice();
   console.log(discount + ' is the price with the biggest discount');
 }
 
