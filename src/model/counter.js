@@ -2,24 +2,35 @@
 
 var Discount = require('./discount');
 var Utils = require('../lib/utils');
+var fixture = require('../../spec/fixtures');
+var BasketItem = require('./basket-item');
+var Strategy = require('./strategy');
 
-function Counter(basket, scanner) {
+function Counter(basket) {
   this.basket = basket;
-  this.scanner = scanner;
 }
 
 Counter.prototype.scan = function (tag) {
+  var allBooks = fixture.loadAllBooks();
+  var book ;
+  var count = 1;
 
-  var basketItem = this.scanner.scan(tag);
-  if (basketItem) {
+  allBooks.forEach(function(oneBook) {
+    if(oneBook.name === tag) {
+      book = oneBook;
+    }
+  });
+  if(book){
+    var basketItem = new BasketItem(book, count);
     this.basket.addBasketItem(basketItem);
   }
 };
 
-Counter.prototype.getDiscount = function () {
+Counter.prototype.getFinalPrice = function () {
 
   var discount = new Discount();
-  var savedAmount = discount.findBestSolve(this.basket.getItemCounts());
+  var stategy = new Strategy(discount);
+  var savedAmount = stategy.findBestSolve(this.basket.getItemCounts());
   return Utils.formatData(savedAmount);
 };
 
