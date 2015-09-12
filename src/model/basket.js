@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 function Basket() {
   this.basketItems = [];
 }
@@ -8,21 +10,15 @@ Basket.prototype.addBasketItem = function (basketItem) {
   var findingItem = this.findBasketItem(basketItem);
   if (findingItem) {
     findingItem.count += basketItem.count;
-  }
-  else {
+  } else {
     this.basketItems.push(basketItem);
   }
 };
 
 Basket.prototype.findBasketItem = function (basketItem) {
-  var result;
-
-  this.basketItems.forEach(function (oneItem) {
-    if (basketItem.book.name === oneItem.book.name) {
-      result = oneItem;
-    }
+  var result =_.findLast(this.basketItems, function (oneItem) {
+    return oneItem.book.name === basketItem.book.name;
   });
-
   if (result) {
     return result;
   }
@@ -30,11 +26,10 @@ Basket.prototype.findBasketItem = function (basketItem) {
 
 Basket.prototype.getItemCounts = function () {
   var counts = [];
-  this.basketItems.forEach(function (basketItem) {
+  this.basketItems.map(function (basketItem) {
     counts.push(basketItem.count);
   });
   return counts;
 };
-
 
 module.exports = Basket;
