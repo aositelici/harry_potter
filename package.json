@@ -1,5 +1,5 @@
 {
-  "name": "guessnumber",
+  "name": "harry_potter",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,4 +13,3 @@
     "jasmine": "^2.3.1"
   }
 }
-
