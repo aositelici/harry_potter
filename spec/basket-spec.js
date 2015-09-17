@@ -37,9 +37,7 @@ describe('basket: ', function () {
                             {book: {name: 'second', price: 8.00}, count: 1}
                            ];
 
-      spyOn(basket, 'findBasketItem').and.callFake(function () {
-        return basket.basketItems[0];
-      });
+      basket.findBasketItem(inputBasketItem);
       basket.addBasketItem(inputBasketItem);
 
       expect(basket.basketItems).toEqual([{book: {name: 'first', price: 8.00}, count: 3},
